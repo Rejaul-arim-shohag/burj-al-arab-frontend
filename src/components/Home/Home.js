@@ -2,6 +2,7 @@ import React from 'react';
 import Room from '../Room/Room';
 
 const Home = () => {
+
     const style = {
         display: 'flex',
         margin: '40px',

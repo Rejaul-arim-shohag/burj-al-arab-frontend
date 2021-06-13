@@ -3,11 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
+import Bookings from '../Bookings/Bookings';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import Button from '@material-ui/core/Button';
+// import Bookings from '../Bookings/Bookings';
 
 const Book = () => {
     const { bedType } = useParams();
@@ -29,17 +31,29 @@ const Book = () => {
         setSelectedDate(newDates);
     };
 
-    const handleBooking =()=> {
-        const newBooking  = {...loggedInUser, ...selectedDate};
-        console.log(newBooking)
-        fetch('http://localhost:5000/addBooking',{
+    // const handleBooking =()=> {
+    //     const newBooking  = {...loggedInUser, ...selectedDate};
+        
+    //     fetch('http://localhost:5000/addBooking',{
+    //         method: 'POST',
+    //         heders:{'Content-Type': 'application/json'},
+    //         body: JSON.stringify(newBooking)
+    //     })
+    //     .then(res =>res.json())
+    //     .then(data =>{
+    //         console.log(data)
+    //     })
+    // }
+    const handleBooking = () =>{
+        const newBooking = {...loggedInUser, ...selectedDate};
+        fetch('http://localhost:5000/addBooking', {
             method: 'POST',
-            heders:{'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newBooking)
         })
-        .then(res =>res.json())
-        .then(data =>{
-            console.log(data)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
         })
     }
 
@@ -80,6 +94,7 @@ const Book = () => {
                     Book Now
                 </Button>
             </MuiPickersUtilsProvider>
+            <Bookings></Bookings>
         </div>
     );
 };
